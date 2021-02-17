@@ -1,0 +1,190 @@
+<!-- <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav mat-elevation-z2" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'side' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="bg-light">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>home</mat-icon>
+    </button>
+      <span>Menu</span>
+  </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <hr>
+      <a mat-list-item href="#">Link 2</a>
+      <hr>
+      <a mat-list-item href="#">Link 3</a>
+      <hr>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6 bg-dark">
+      <mat-toolbar-row fxLayoutAlign="space-between center">
+          <div fxLayout="row">
+                <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <span class="logo">Admin Dashboard</span>
+                <div *ngIf="!deviceXs">
+                  <a mat-button>Home</a>
+                  <a mat-button>Services</a>
+                  <a mat-button>Projects</a>
+                  <a mat-button>Sign Up</a>
+                </div>
+            </div>
+            <div>
+              <button mat-icon-button>
+                <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
+                <span *ngIf="!deviceXs">Menu</span>
+              </button>
+            </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between end">
+        <a mat-button>Home</a>
+        <a mat-button>Services</a>
+        <a mat-button>Projects</a>
+        <a mat-button>Sign Up</a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+<!-- <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav mat-elevation-z2" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'side' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="bg-light">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>home</mat-icon>
+    </button>
+      <span>Menu</span>
+  </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <hr>
+      <a mat-list-item href="#">Link 2</a>
+      <hr>
+      <a mat-list-item href="#">Link 3</a>
+      <hr>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6 bg-dark">
+      
+      <mat-toolbar-row fxLayoutAlign="space-between center">
+          <div fxLayout="row">
+                <button
+                    type="button"
+                    aria-label="Toggle sidenav"
+                    mat-icon-button
+                    (click)="drawer.toggle()">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                </button>
+                <span class="logo">Admin Dashboard</span>
+                <div *ngIf="!deviceXs">
+                  <a mat-button>Home</a>
+                  <a mat-button>Services</a>
+                  <a mat-button>Projects</a>
+                  <a mat-button>Sign Up</a>
+                </div>
+            </div>
+            <div>
+              <button mat-icon-button>
+                <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
+                <span *ngIf="!deviceXs">Menu</span>
+              </button>
+            </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between end">
+        <a mat-button>Home</a>
+        <a mat-button>Services</a>
+        <a mat-button>Projects</a>
+        <a mat-button>Sign Up</a>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+<mat-toolbar color="primary" class="mat-elevation-z6 bg-dark">
+  <mat-toolbar-row fxLayoutAlign="space-between center">
+      <div fxLayout="row">
+        <button
+        *ngIf="userIsAuthenticated"
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+            <span class="logo">Admin Dashboard</span>
+            <div *ngIf="!deviceXs">
+              <a mat-button routerLink="/"  *ngIf="userIsAuthenticated">Home</a>
+              <a mat-button routerLink="/aptitude"  *ngIf="userIsAuthenticated">Aptitude</a>
+              <!-- <a mat-button routerLink="/profile"  *ngIf="userIsAuthenticated">Profile</a> -->
+              <a mat-button routerLink="/login"  *ngIf="!userIsAuthenticated">Login</a>
+              <a mat-button routerLink="/signup"  *ngIf="!userIsAuthenticated">Sign Up</a>
+              <a mat-button *ngIf="userIsAuthenticated" (click)="logout()">Logout</a>
+            </div>
+        </div>
+        <div>
+
+          <button mat-icon-button>
+            <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
+            <span *ngIf="!deviceXs">{{ user?.firstName }} {{ user?.lastName}}</span>
+            <!-- <span *ngIf="!deviceXs">Menu</span> -->
+          </button>
+        
+          <button mat-icon-button routerLink="/notifications"  *ngIf="userIsAuthenticated">
+            <mat-icon *ngIf="deviceXs">more_vert</mat-icon>
+            <span *ngIf="!deviceXs"><mat-icon>notifications</mat-icon></span>
+          </button>
+        </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between end">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/aptitude">Aptitude</a>
+    <!-- <a mat-button routerLink="/profile">Profile</a> -->
+    <a mat-button routerLink="/signup">Sign Up</a>
+    <a mat-button>Logout</a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #drawer opened mode="side" class="mat-elevation-z2" 
+  [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  [opened]="(isHandset$ | async) === false"
+ >
+    <mat-nav-list *ngIf="userIsAuthenticated"  style="width: 270px;">
+      <a mat-list-item href="#" routerLink="/">Dashboard</a>
+      <hr>
+      <a mat-list-item href="#" routerLink="/aptitude">Aptitude</a>
+      <hr>
+      <a mat-list-item href="#" routerLink="/upload">Practice Questions</a>
+      <hr>
+      <a mat-list-item href="#" routerLink="/customizedQuestions">Test</a>
+      <hr>
+      <a mat-list-item href="#" routerLink="/accounts">Accounts</a>
+      <hr>
+      <!-- <a mat-list-item href="#" routerLink="/profile">Profile</a>
+      <hr> -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+  
+
+
+
+    

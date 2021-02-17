@@ -1,0 +1,78 @@
+<mat-card *ngIf="topics?.length > 0">
+    <h5 class="text-center m-2">CREATE TEST</h5>
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="inputEmail4">Title</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Enter Test Name" formControlName="title">
+          </div>
+            <div class="form-group">
+                <label for="inputState">Topics</label>
+                <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+                </mat-select>
+                <!-- <select  class="form-control"  (change)="changeTopic($event)">
+                  <option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</option>
+                </select> -->
+            </div>
+            <div *ngIf="questions.length > 0" class="m-4">
+                <mat-expansion-panel *ngFor="let question of questions; let i = index" class="mt-4">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <p>Question {{ i+1 }}</p>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>{{ i + 1}} ) {{ question.title }}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p>A ) {{ question.optA }}</p>
+                        </div>
+                        <div class="col">
+                            <p>B ) {{ question.optB }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>C ) {{ question.optC }}</p>
+                        </div>
+                        <div class="col">
+                            <p>D ) {{ question.optD }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Correct Answer : {{ question.ans }}</p>
+                        </div>
+                    </div>
+                    <mat-action-row>
+                        <input type="number" class="form-control" placeholder="Enter Score" formControlName="score">
+                        <div *ngIf="createForm.controls.score.invalid">
+                            <button type="button" mat-raised-button disabled color="primary" (click)="addQuestions(question._id)">ADD</button>
+                        </div>
+                        <div *ngIf="!createForm.controls.score.invalid">
+                            <button type="button" mat-raised-button color="primary" (click)="addQuestions(question._id)">ADD</button>
+                        </div>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </div>
+            
+            <div class="form-group">
+                <label for="inputState">Topics</label>
+                <mat-select class="form-control"  (selectionChange)="changeType($event)">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let typ of type" [value]="typ.value">{{ typ.name }}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail4">Durations</label>
+                <input type="number" class="form-control" id="inputEmail4" placeholder="Enter Durations in Minutes" formControlName="durations">
+              </div>
+
+            <button type="submit" class="btn btn-primary" >CREATE</button>
+    </form>
+</mat-card>
+
+<div *ngIf="topics?.length <= 0">
+    Loading....
+</div>

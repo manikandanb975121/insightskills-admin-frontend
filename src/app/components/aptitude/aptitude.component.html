@@ -1,0 +1,22 @@
+<div class="m-3 shadow-sm">
+  <nav aria-label="breadcrumb" class="">
+      <ol class="breadcrumb bg-white p-3">
+          <li class="breadcrumb-item"><a routerLink="/">DashBoard</a></li>
+          <!-- <li class="breadcrumb-item"><a href="#">Test</a></li> -->
+          <li class="breadcrumb-item active">Aptitude</li>
+        </ol>
+    </nav>
+</div>
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <button mat-raised-button (click)="openDialog()"><mat-icon>add</mat-icon>Add Topics</button>
+        </div>
+      </div>
+    </div>
+</section>
+<div class="container mt-4">
+    <!-- <app-topics-create></app-topics-create> -->
+    <app-topics-list></app-topics-list>
+</div>

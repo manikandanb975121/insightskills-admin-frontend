@@ -1,0 +1,41 @@
+<!-- <mat-card> -->
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="inputState">Select Test</label>
+            <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let test of testList" [value]="test.id">{{ test.title }}</mat-option>
+            </mat-select>
+            <!-- <select  class="form-control"  (change)="changeTopic($event)">
+              <option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</option>
+            </select> -->
+        </div>
+
+
+        <!-- <div class="form-group">
+            <label>Test Durations</label>
+            <input type="number" class="form-control" id="inputEmail4" placeholder="Enter Test Duration in minutes" formControlName="testDurations">
+          </div> -->
+
+          <!-- <mat-form-field class="form-group" style="width: 550px">
+            <input
+              type="number"
+              matInput
+              placeholder="Enter Test Duration in Minutes"
+              required
+              formControlName="testDurations"
+              >
+              <mat-error *ngIf="testForm.controls.testDurations.invalid">Enter Valid Duration</mat-error>
+            <mat-icon matSuffix>watch_later</mat-icon>
+          </mat-form-field> -->
+
+          <div class="form-group" *ngIf="testId == undefined">
+            <button type="submit" mat-raised-button disabled [mat-dialog-close]="true">CREATE TEST</button>
+          </div>
+          
+          <div class="form-group" *ngIf="testId">
+            <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREATE TEST</button>
+          </div>
+    </form>
+<!-- </mat-card> -->

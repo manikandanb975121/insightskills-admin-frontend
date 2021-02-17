@@ -1,0 +1,31 @@
+<div *ngIf="notifications?.length > 0" class="m-4">
+    <h6 class="card shadow-sm p-3"> No Of Notifications: {{ notifications?.length }} </h6>
+    
+    <mat-expansion-panel *ngFor="let notification of notifications; let i = index" class="mt-4 p-3">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <p>{{ notification.title }}</p>
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ notification.createdDate | date: 'short' }}
+             </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+            <div class="col-md-12">
+                <p>{{ notification.content }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngFor="let link of notification.links">
+                    <p class="text-primary" (click)="openLink(link)">{{ link }}</p>
+                </div>
+            </div>
+        </div>
+        <mat-action-row>
+            <!-- <button type="button" mat-raised-button color="primary" (click)="openPratice(notification._id)">View</button> -->
+            <button type="button" mat-raised-button color="warn" (click)="deletenotifications(notification._id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</div>

@@ -1,0 +1,96 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="m-4">
+
+    <div class="form-group">
+        <mat-form-field class="form-group" style="width: 550px">
+            <input type="text"  matInput  placeholder="First Name" required formControlName="firstName">
+            <mat-error *ngIf="studentForm.controls.firstName.invalid">Enter First Name</mat-error>
+        </mat-form-field>
+        <!-- <input type="text"  matInput class="form-control" placeholder="First Name" required formControlName="firstName"> -->
+    </div>
+
+    <div class="form-group">
+        <mat-form-field class="form-group" style="width: 550px">
+            <input type="text"  matInput  placeholder="Last Name" required formControlName="lastName">
+            <mat-error *ngIf="studentForm.controls.lastName.invalid">Enter last Name</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+        <mat-form-field class="form-group" style="width: 550px">
+            <input type="email"  matInput  placeholder="Email Id" required formControlName="mailId">
+            <mat-error *ngIf="studentForm.controls.mailId.invalid">Enter mailId</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <label for="inputState">Select College</label>
+      <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let college of collegeName" [value]="college._id">{{ college.collegeName }}</mat-option>
+    </mat-select>
+      <!-- <select  class="form-control"  (change)="changeTopic($event)">
+        <option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</option>
+      </select> -->
+  </div>
+  
+    <div class="form-group">
+        <mat-form-field class="form-group" style="width: 550px">
+            <input type="text"  matInput  placeholder="Password" required formControlName="password">
+            <mat-error *ngIf="studentForm.controls.password.invalid">Enter the Password</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-group" style="width: 550px">
+          <input type="text"  matInput  placeholder="Contact Number" required formControlName="contact">
+          <mat-error *ngIf="studentForm.controls.contact.invalid">Enter the Contact Number</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-group" style="width: 550px">
+          <input type="text"  matInput  placeholder="Degree" required formControlName="degree">
+          <mat-error *ngIf="studentForm.controls.degree.invalid">Enter the Degress</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-group" style="width: 550px">
+          <input type="text"  matInput  placeholder="Department" required formControlName="department">
+          <mat-error *ngIf="studentForm.controls.department.invalid">Enter the Department</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field class="form-group" style="width: 550px">
+          <input type="text"  matInput  placeholder="Graduating Year" required formControlName="graduatingYear">
+          <mat-error *ngIf="studentForm.controls.graduatingYear.invalid">Enter the Graduating Year</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <!-- <div class="form-group">
+        <label>Test Durations</label>
+        <input type="number" class="form-control" id="inputEmail4" placeholder="Enter Test Duration in minutes" formControlName="testDurations">
+      </div> -->
+
+      <!-- <mat-form-field class="form-group" style="width: 550px">
+        <input
+          type="number"
+          matInput
+          placeholder="Enter Test Duration in Minutes"
+          required
+          formControlName="testDurations"
+          >
+          <mat-error *ngIf="testForm.controls.testDurations.invalid">Enter Valid Duration</mat-error>
+        <mat-icon matSuffix>watch_later</mat-icon>
+      </mat-form-field> -->
+
+      <div class="form-group" *ngIf="studentForm.controls.firstName.invalid || studentForm.controls.lastName.invalid || studentForm.controls.mailId.invalid || studentForm.controls.password.invalid">
+        <button type="submit" mat-raised-button disabled [mat-dialog-close]="true">CREATE STUDENT ACCOUNT</button>
+      </div>
+      
+      <div class="form-group" *ngIf="!studentForm.controls.firstName.invalid && !studentForm.controls.lastName.invalid && !studentForm.controls.mailId.invalid && !studentForm.controls.password.invalid">
+        <button type="submit" mat-raised-button color="warn" [mat-dialog-close]="true">CREATE STUDENT ACCOUNT</button>
+      </div>
+</form>

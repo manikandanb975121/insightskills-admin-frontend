@@ -1,0 +1,23 @@
+
+<!-- <mat-card> -->
+<div class="m-4">
+    <form [formGroup]="aptitudeForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Topic Name</label>
+            <input type="text" class="form-control"  placeholder="Enter Topic" formControlName="title" required>
+        </div>
+        <div class="form-group">
+            <label>Topic Descriptions</label>
+            <input type="text" class="form-control"  placeholder="Descriptions" formControlName="descriptions" required>
+        </div>
+        <div class="form-group">
+            <!-- <label>Enable Topic to College</label> -->
+            <!-- <input type="checkbox" class="form-control"  placeholder="Descriptions" formControlName="adminEnable" required> -->
+            <mat-checkbox formControlName="adminEnable" color="primary">Enable Topic to College</mat-checkbox>
+        </div>
+        <button type="submit"  mat-raised-button color="primary">Submit</button>
+        <button type="submit"  mat-raised-button color="warn"class="m-4" [mat-dialog-close]="true">Close</button>
+    </form>
+</div>
+    
+<!-- </mat-card> -->

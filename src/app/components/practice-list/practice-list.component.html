@@ -1,0 +1,40 @@
+<div *ngIf="practiceQuestions?.length > 0" class="m-4">
+    <h6 class="card shadow-sm p-3"> No Of Questions: {{ practiceQuestions.length }} </h6>
+    
+    <mat-expansion-panel *ngFor="let practice of practiceQuestions; let i = index" class="mt-4 p-3">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <p>Question {{ i+1 }}</p>
+            </mat-panel-title>
+            <mat-panel-description>
+                {{ practice.title }}
+             </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ i + 1}} ) {{ practice.question.title }}</p>
+        <div class="row">
+            <div class="col">
+                <p>A ) {{ practice.question.optA }}</p>
+            </div>
+            <div class="col">
+                <p>B ) {{ practice.question.optB }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>C ) {{ practice.question.optC }}</p>
+            </div>
+            <div class="col">
+                <p>D ) {{ practice.question.optD }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Correct Answer : {{ practice.question.ans }}</p>
+            </div>
+        </div>
+        <mat-action-row>
+            <button type="button" mat-raised-button color="primary" (click)="openPratice(practice._id)">View</button>
+            <button type="button" mat-raised-button color="warn" (click)="deletePratice(practice._id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</div>

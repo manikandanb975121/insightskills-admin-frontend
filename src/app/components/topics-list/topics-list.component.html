@@ -1,0 +1,25 @@
+
+
+<mat-accordion *ngIf="topics.length > 0">
+    <mat-expansion-panel *ngFor="let topic of topics; let i = index" class="mt-3 p-3">
+        <mat-expansion-panel-header>
+            <h6>{{ topic.title | uppercase }}</h6>
+        </mat-expansion-panel-header>
+        <p>{{ topic.descriptions | uppercase }}</p>
+        <mat-action-row>
+            <div *ngIf="topic.adminEnable"> 
+                <button mat-raised-button color="warn" (click)="enableAndDisable(topic.id, topic.adminEnable, i)">DISABLE</button>
+            </div>
+            <div *ngIf="!topic.adminEnable">
+                <button mat-raised-button color="primary" (click)="enableAndDisable(topic.id, topic.adminEnable, i)">ENABLE</button>
+            </div>
+            <button mat-button color="warn" (click)="details(topic.id)">ADD QUESTIONS</button>
+            <button mat-button color="primary">EDIT</button>
+            <button mat-button color="warn" (click)="deleteTopic(topic.id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="topics.length <= 0">
+    <p>No Topics added yet !</p>
+</div>

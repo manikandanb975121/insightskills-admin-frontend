@@ -1,0 +1,157 @@
+<div *ngIf="tests">
+    <mat-expansion-panel *ngFor="let test of tests; let i = index" class="m-4 p-3">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ test.test.title }}
+             </mat-panel-title>
+           <mat-panel-description>
+              {{ test.onCreate | date: 'medium'}}
+           </mat-panel-description>
+           <mat-panel-description>
+            {{ test.test.durations }} mins
+         </mat-panel-description>
+         <!-- <div > -->
+            <mat-panel-description *ngIf="test.test.status == 'On Process'" class="text-success">
+                STATUS: {{ test.test.status | uppercase }}
+            </mat-panel-description>
+        <!-- </div> -->
+
+        <!-- <div > -->
+            <mat-panel-description *ngIf="test.test.status == 'NOT YET STARTED'" class="text-danger">
+                STATUS: {{ test.test.status | uppercase }}
+            </mat-panel-description>
+        <!-- </div> -->
+           
+         
+        </mat-expansion-panel-header>
+        
+        <mat-expansion-panel *ngFor="let question of test.test.questionID; let i = index" class="p-2 m-3">
+            <mat-expansion-panel-header>
+                Questions {{ i + 1 }}
+            </mat-expansion-panel-header>
+            <h6>{{ i + 1}} ) {{ question.questionsId.title | uppercase }}</h6>
+    
+            <div class="row">
+                <div class="col">
+                    <p>A ) {{ question.questionsId.optA }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>B ) {{ question.questionsId.optB }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <p>C ) {{ question.questionsId.optC }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>D ) {{ question.questionsId.optD }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <h6>Correct Answer : {{ question.questionsId.ans }}</h6>
+                </div>
+            </div>
+    
+        </mat-expansion-panel>
+        <mat-action-row>
+            <div *ngIf="test.test.startDate.length <= 0">
+                <button mat-button color="primary" (click)="openDate(dateTime)">SET TIMER</button>
+            </div>
+            <div *ngIf="test.test.status == 'NOT YET STARTED' && test.test.startDate.length > 0">
+                <button mat-button color="primary" (click)="startTest(test._id, i, test.test._id)">START TEST</button>
+            </div>
+            
+            <div *ngIf="test.test.status === 'On Process'">
+                <button mat-button color="primary" (click)="ViewTest(test._id)">VIEW TEST PROGRESS</button>
+            </div>
+            
+            <div *ngIf="test.test.status == 'NOT YET STARTED'">
+                <button mat-button color="warn" (click)="deletTest(test._id, test.test._id)">REMOVE TEST</button>
+            </div>
+
+            <div *ngIf="test.test.status == 'On Process'">
+                <button mat-button color="warn" (click)="stopTest(test._id, i, test.test._id)">STOP TEST</button>
+            </div>
+
+        </mat-action-row>
+
+        <ng-template #dateTime>
+            <div class="row m-4">
+                <div class="col-md-4">
+                    <h6>Start Date And Time</h6>
+                </div>
+                <div class="col-md-8">
+                    <angular2-date-picker (onDateSelect)="onDateSelect($event)" 
+                        [(ngModel)]="date" 
+                        [settings]="settings" >
+                    </angular2-date-picker>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col-md-4">
+                    <h6>End Date And Time</h6>
+                </div>
+                <div class="col-md-8">
+                    <angular2-date-picker (onDateSelect)="onEndDateSelect($event)" 
+                        [(ngModel)]="date2" 
+                        [settings]="settings2" >
+                    </angular2-date-picker>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col" *ngIf="startDate == undefined || endDate == undefined">
+                    <button mat-raised-button disabled>Set Timer</button>
+                </div>
+    
+                <div class="col" *ngIf="startDate && endDate">
+                    <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="submitDate(test.test._id, i)">Set Timer</button>
+                </div>
+            </div>
+        </ng-template>
+
+
+     </mat-expansion-panel>
+
+    <!-- <ng-template #dateTime>
+        <div class="row m-4">
+            <div class="col-md-4">
+                <h6>Start Date And Time</h6>
+            </div>
+            <div class="col-md-8">
+                <angular2-date-picker (onDateSelect)="onDateSelect($event)" 
+                    [(ngModel)]="date" 
+                    [settings]="settings" >
+                </angular2-date-picker>
+            </div>
+        </div>
+        <div class="row m-4">
+            <div class="col-md-4">
+                <h6>End Date And Time</h6>
+            </div>
+            <div class="col-md-8">
+                <angular2-date-picker (onDateSelect)="onEndDateSelect($event)" 
+                    [(ngModel)]="date2" 
+                    [settings]="settings2" >
+                </angular2-date-picker>
+            </div>
+        </div>
+        <div class="row m-4">
+            <div class="col" *ngIf="startDate == undefined || endDate == undefined">
+                <button mat-raised-button disabled (click)="submitDate()">Set Timer</button>
+            </div>
+
+            <div class="col" *ngIf="startDate && endDate">
+                <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="submitDate(test.test._id)">Set Timer</button>
+            </div>
+        </div>
+    </ng-template> -->
+       
+</div>
+
+
+

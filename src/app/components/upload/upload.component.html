@@ -1,0 +1,21 @@
+<div class="m-3 shadow-sm">
+    <nav aria-label="breadcrumb" class="">
+        <ol class="breadcrumb bg-white p-3">
+            <li class="breadcrumb-item"><a routerLink="/">DashBoard</a></li>
+            <!-- <li class="breadcrumb-item"><a href="#">Test</a></li> -->
+            <li class="breadcrumb-item active">Practice Questions</li>
+          </ol>
+      </nav>
+  </div>
+
+<div class="row m-5">
+    <div class="col">
+        <button mat-fab color="warn" class="cursorPointer b" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+    </div>
+</div>
+
+<div class="row m-5">
+    <div class="col">
+        <app-practice-list></app-practice-list>
+    </div>
+</div>

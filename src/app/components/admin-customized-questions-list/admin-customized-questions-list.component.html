@@ -1,0 +1,49 @@
+<div *ngFor="let test of testDetails" class="m-4">
+    <mat-expansion-panel class="p-1">
+        <mat-expansion-panel-header class="m-3">
+            <mat-panel-title>
+                <p>{{ test.title }}</p>
+            </mat-panel-title>
+            <mat-panel-description>
+                <p>Mark: {{ test.mark }}</p>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <mat-expansion-panel *ngFor="let question of test.questions; let i = index" class="m-4">
+            <mat-expansion-panel-header>
+                    Questions {{ i + 1 }}
+            </mat-expansion-panel-header>
+            <h6>{{ i + 1}} ) {{ question.questionsId.title | uppercase }}</h6>
+    
+            <div class="row">
+                <div class="col">
+                    <p>A ) {{ question.questionsId.optA }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>B ) {{ question.questionsId.optB }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <p>C ) {{ question.questionsId.optC }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>D ) {{ question.questionsId.optD }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <h5>Correct Answer : {{ question.questionsId.ans }}</h5>
+                </div>
+            </div>
+    
+         </mat-expansion-panel>
+         <mat-action-row>
+            <button mat-button color="primary" (click)="deleteQuestions(test.id)">DELETE</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+    </div>

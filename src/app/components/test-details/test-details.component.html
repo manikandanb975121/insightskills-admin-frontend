@@ -1,0 +1,265 @@
+<div class="m-3 shadow-sm">
+    <nav aria-label="breadcrumb" class="">
+        <ol class="breadcrumb bg-white p-3">
+            <li class="breadcrumb-item"><a routerLink="/">DashBoard</a></li>
+            <li class="breadcrumb-item"><a href="#">Test</a></li>
+            <li class="breadcrumb-item active">{{ testDetails?.test.title }}</li>
+          </ol>
+      </nav>
+</div>
+
+<div *ngIf="testDetails?.test.questionID.length > 0">
+    <div class="row m-2">
+        <div class="col-sm-3 mt-2">
+            <mat-card class="example-card">
+                <mat-icon>alarm</mat-icon>
+                <mat-card-content class="m-3">
+                    <!-- <div class="container-fluid"> -->
+                        <h6 class="text-center text-danger" style="letter-spacing: 5px;">DURATIONS</h6>
+                        <h1 class="text-center">{{ testDetails?.test.durations }}<h6>Mins</h6></h1>
+                    <!-- </div> -->
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary">DURATIONS</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <div class="col-sm-3 mt-2">
+            <mat-card class="example-card">
+                <mat-icon>group_work</mat-icon>
+                <mat-card-content class="m-3">
+                    <h6 class="text-center text-danger" style="letter-spacing: 5px;">TOTAL QUESTIONS</h6>
+                 <h1 class="text-center"> {{ testDetails?.test.questionID.length }} <h6>Questions</h6></h1>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary" (click)="openModel(mytemplate)">VIEW</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <div class="col-sm-3 mt-2">
+            <mat-card class="example-card">
+                <mat-icon>person_search</mat-icon>
+                <mat-card-content class="m-3">
+                    <h6 class="text-center text-danger" style="letter-spacing: 5PX;">TOTAL STUDENTS</h6>
+                    <h1 class="text-center"> {{ testDetails?.students.length }} <h6>Students</h6> </h1>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary" (click)="openStudent(student)">VIEW</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+
+        <div class="col-sm-3 mt-2">
+            <mat-card class="example-card">
+                <mat-icon>person_search</mat-icon>
+                <mat-card-content class="m-3">
+                    <h6 class="text-center text-danger" style="letter-spacing: 5PX;">TEST AVAILABLE</h6>
+                    <h1 class="text-center"> {{ hours  | number: '1.0-0' }} <h6>Hours</h6> </h1>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary" (click)="openStudent(student)">VIEW</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+
+    </div>
+    
+    <div class="m-3 mt-5">
+        <mat-card class="wh">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h6 style="letter-spacing: 5px; word-spacing: 5px;">TEST DETAILS</h6>
+                </div>
+                <div class="col-sm-8">
+                    <h6 style="letter-spacing: px">Admin ID: {{ testDetails?.adminId }}</h6>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-2">
+                    <h6 style="word-spacing: 8px;"><mat-icon>topic</mat-icon>      TEST NAME : </h6>
+                </div>
+                <div class="col-sm-10">
+                    <h6 style="letter-spacing: 5px; word-spacing: 5px;">{{ testDetails?.test.title | uppercase }}</h6>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-2">
+                    <h6 style="word-spacing: 8px;"><mat-icon>alarm</mat-icon> DURATIONS : </h6>
+                </div>
+                <div class="col-sm-10">
+                    <h6 style="letter-spacing: 5px; word-spacing: 5px;">{{ testDetails?.test.durations }} minutes</h6>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-2">
+                    <h6 style="word-spacing: 4px;"><mat-icon>group_work</mat-icon>TOTAL QUESTIONS:</h6>
+                </div>
+                <div class="col-sm-10">
+                    <h6>{{ testDetails?.test.questionID.length }}</h6>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-2">
+                    <h6 style="word-spacing: 8px;"><mat-icon>person_search</mat-icon>STUDENTS : </h6>
+                </div>
+                <div class="col-sm-10">
+                    <h6>{{ testDetails?.students.length }}</h6>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-2">
+                    <button mat-raised-button color="warn" (click)="openModel(mytemplate)" >VIEW QUESTIONS</button>
+                </div>
+                <div class="col-sm-2">
+                    <button mat-raised-button color="warn" (click)="openStudent(student)">VIEW STUDENTS</button>
+                </div>
+            </div>
+        </mat-card>
+        
+    </div>
+
+</div>
+
+
+
+<!-- <div class="row">
+    <div class="col m-2">
+        <mat-expansion-panel *ngFor="let question of testDetails?.test.questionID; let i = index" class="p-2 m-3">
+            <mat-expansion-panel-header>
+                Questions {{ i + 1 }}
+            </mat-expansion-panel-header>
+            <h4>{{ i + 1}} ) {{ question.title | uppercase }}</h4>
+    
+            <div class="row">
+                <div class="col">
+                    <p>A ) {{ question.optA }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>B ) {{ question.optB }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <p>C ) {{ question.optC }}</p>
+                </div>
+    
+                <div class="col">
+                    <p>D ) {{ question.optD }}</p>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <h3>Correct Answer : {{ question.ans }}</h3>
+                </div>
+            </div>
+    
+         </mat-expansion-panel>
+    </div>
+</div> -->
+
+<ng-template #mytemplate>
+    <div class="row m-3">
+        <div class="col">
+            <h5>{{ testDetails?.test.title }}</h5>
+        </div>
+        <div class="col">
+            <h5>No Of Questions: {{ testDetails?.test.questionID.length }}</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m-2">
+            <mat-expansion-panel *ngFor="let question of testDetails?.test.questionID; let i = index" class="p-2 m-3">
+                <mat-expansion-panel-header>
+                    Questions {{ i + 1 }}
+                </mat-expansion-panel-header>
+                <h6>{{ i + 1}} ) {{ question.questionsId.title | uppercase }}</h6>
+        
+                <div class="row">
+                    <div class="col">
+                        <p>A ) {{ question.questionsId.optA }}</p>
+                    </div>
+        
+                    <div class="col">
+                        <p>B ) {{ question.questionsId.optB }}</p>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col">
+                        <p>C ) {{ question.questionsId.optC }}</p>
+                    </div>
+        
+                    <div class="col">
+                        <p>D ) {{ question.questionsId.optD }}</p>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col">
+                        <h5>Correct Answer : {{ question.questionsId.ans }}</h5>
+                    </div>
+                </div>
+        
+             </mat-expansion-panel>
+        </div>
+    </div>
+    
+</ng-template>
+
+
+<ng-template #student>
+    <div class="row">
+        <div class="col">
+            <h2>STUDENT ATTENDING TEST</h2>
+        </div>
+    </div>
+    <div class="mat-elevation-z8 m-2">
+        <mat-table [dataSource]="studentData" matSort>
+            <ng-container matColumnDef="First Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.firstName }}</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="Last Name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.lastName }}</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="Email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.mailId }}</mat-cell>
+            </ng-container>
+    
+            <!-- <ng-container matColumnDef="CollegeTest">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>College Test</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.collegeTest.length }}</mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="College">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>College Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.college.collegeName }}</mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button class="cursorPointer b" (click)="viewProfile(element._id)"><mat-icon>launch</mat-icon></button>
+                    <button mat-icon-button color="warn" class="cursorPointer b" (click)="deleteStudent(element._id)"><mat-icon>delete_outline</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Loading data...
+                </mat-footer-cell>
+            </ng-container>
+    
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide': studentData!=null}"></mat-footer-row>
+        </mat-table>
+    </div>
+</ng-template>

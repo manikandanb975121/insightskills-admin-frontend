@@ -1,0 +1,241 @@
+<!-- <mat-card> -->
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+
+        <div class="form-group">
+            <mat-form-field class="form-group" style="width: 650px">
+                <input type="text"  matInput  placeholder="Message" required formControlName="message">
+                <mat-error *ngIf="testForm.controls.message.invalid">Enter the Message</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <label for="inputState">Select Difficulty</label>
+            <mat-select class="form-control"  (selectionChange)="changeDiff($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let diff of difficulty" [value]="diff.value">{{ diff.name }}</mat-option>
+          </mat-select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="inputState">Select Test</label>
+            <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+            </mat-select>
+        </div>
+
+        <!-- <div class="form-group">
+            <button type="button" mat-raised-button color="primary" (click)="openQuestions(questions)">Choose Questions</button>
+        </div> -->
+        
+
+        <div *ngIf="questions?.length > 0" class="m-4">
+          <mat-expansion-panel *ngFor="let question of questions; let i = index" class="mt-4">
+              
+            <mat-expansion-panel-header>
+
+                  <mat-panel-title>
+                      <p>Question {{ i+1 }}</p>
+                  </mat-panel-title>
+              
+            </mat-expansion-panel-header>
+
+              <p>{{ i + 1}} ) {{ question.title }}</p>
+
+              <div class="row">
+                  <div class="col">
+                      <p>A ) {{ question.optA }}</p>
+                  </div>
+                  <div class="col">
+                      <p>B ) {{ question.optB }}</p>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <p>C ) {{ question.optC }}</p>
+                  </div>
+                  <div class="col">
+                      <p>D ) {{ question.optD }}</p>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col">
+                      <p>Correct Answer : {{ question.ans }}</p>
+                  </div>
+              </div>
+
+              <mat-action-row>
+                  <div *ngIf="questionId.length <= 1">
+                    <button type="button" mat-raised-button color="primary" (click)="addQuestions(question._id, title)">ADD</button>
+                  </div>
+                  <div *ngIf="questionId.length > 1">
+                    <button type="button" mat-raised-button color="primary">Already Question Added</button>
+                  </div>
+              </mat-action-row>
+
+          </mat-expansion-panel>
+        </div>  
+
+
+      
+        <div class="form-group">
+            <mat-form-field class="form-group" style="width: 650px">
+                <textarea matInput placeholder="Enter solutions" formControlName="solutions"></textarea>
+                <mat-error *ngIf="testForm.controls.solutions.invalid">Enter the solutions</mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <div class="form-group">
+        
+            <div class="row">
+                <div class="col-md-6">
+                    <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+                    <input type="file" #filePicker multiple="" accept="image/*" enctype="multipart/form-data"  (change)="imagePicker($event)"/>
+                </div>
+                <div class="col-md-6">
+                    <button mat-raised-button type="button" color="primary" (click)="createPratice()">Upload</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <img *ngFor='let url of images'  [src]="url" class="image-preview m-2"> <br/> -->
+        
+        <div class="image-preview" *ngIf="imagePreview">
+            <img [src]="imagePreview" alt="image preview">
+        </div>
+
+
+        <!-- <ng-template #questions let-data>
+            
+            <label for="inputState">Select Test</label>
+            <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+            </mat-select>
+        
+            {{ data?.length }}
+
+            <div *ngIf="questions?.length > 0" class="m-4">
+                <h2>hai</h2>
+                <mat-expansion-panel *ngFor="let question of questions; let i = index" class="mt-4">
+                    
+                  <mat-expansion-panel-header>
+        
+                        <mat-panel-title>
+                            <p>Question {{ i+1 }}</p>
+                        </mat-panel-title>
+                    
+                  </mat-expansion-panel-header>
+        
+                    <p>{{ i + 1}} ) {{ question.title }}</p>
+        
+                    <div class="row">
+                        <div class="col">
+                            <p>A ) {{ question.optA }}</p>
+                        </div>
+                        <div class="col">
+                            <p>B ) {{ question.optB }}</p>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col">
+                            <p>C ) {{ question.optC }}</p>
+                        </div>
+                        <div class="col">
+                            <p>D ) {{ question.optD }}</p>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col">
+                            <p>Correct Answer : {{ question.ans }}</p>
+                        </div>
+                    </div>
+        
+                    <mat-action-row>
+                        <div *ngIf="questionId.length <= 1">
+                          <button type="button" mat-raised-button color="primary" (click)="addQuestions(question._id, title)">ADD</button>
+                        </div>
+                        <div *ngIf="questionId.length > 1">
+                          <button type="button" mat-raised-button color="primary">Already Question Added</button>
+                        </div>
+                    </mat-action-row>
+        
+                </mat-expansion-panel>
+            </div>
+        
+        </ng-template> -->
+
+    </form>
+
+
+<!-- </mat-card> -->
+
+
+<!-- <ng-template #questions>
+
+    <label for="inputState">Select Test</label>
+    <mat-select class="form-control"  (selectionChange)="changeTopic($event)">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+    </mat-select>
+
+
+    <div *ngIf="questions?.length > 0" class="m-4">
+        <h2>hai</h2>
+        <mat-expansion-panel *ngFor="let question of questions; let i = index" class="mt-4">
+            
+          <mat-expansion-panel-header>
+
+                <mat-panel-title>
+                    <p>Question {{ i+1 }}</p>
+                </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+
+            <p>{{ i + 1}} ) {{ question.title }}</p>
+
+            <div class="row">
+                <div class="col">
+                    <p>A ) {{ question.optA }}</p>
+                </div>
+                <div class="col">
+                    <p>B ) {{ question.optB }}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p>C ) {{ question.optC }}</p>
+                </div>
+                <div class="col">
+                    <p>D ) {{ question.optD }}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p>Correct Answer : {{ question.ans }}</p>
+                </div>
+            </div>
+
+            <mat-action-row>
+                <div *ngIf="questionId.length <= 1">
+                  <button type="button" mat-raised-button color="primary" (click)="addQuestions(question._id, title)">ADD</button>
+                </div>
+                <div *ngIf="questionId.length > 1">
+                  <button type="button" mat-raised-button color="primary">Already Question Added</button>
+                </div>
+            </mat-action-row>
+
+        </mat-expansion-panel>
+    </div>
+
+</ng-template> -->
